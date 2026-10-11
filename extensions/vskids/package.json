@@ -1,0 +1,142 @@
+{
+  "name": "vskids",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "0.1.0",
+  "publisher": "vskids",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.142.0"
+  },
+  "main": "./out/extension",
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "workspaceContains:.vskids/config.json",
+    "onCommand:vskids.welcome",
+    "onCommand:vskids.newProject",
+    "onCommand:vskids.loadProject",
+    "onCommand:vskids.save",
+    "onCommand:vskids.start"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "vskids.newProject",
+        "title": "New Project",
+        "category": "Vibekids"
+      },
+      {
+        "command": "vskids.loadProject",
+        "title": "Load Project",
+        "category": "Vibekids"
+      },
+      {
+        "command": "vskids.save",
+        "title": "Save",
+        "category": "Vibekids",
+        "icon": "$(save)"
+      },
+      {
+        "command": "vskids.start",
+        "title": "Start Vibekids",
+        "category": "Vibekids"
+      },
+      {
+        "command": "vskids.welcome",
+        "title": "Show Welcome",
+        "category": "Vibekids"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "vskids.newProject",
+          "when": "false"
+        },
+        {
+          "command": "vskids.loadProject",
+          "when": "false"
+        },
+        {
+          "command": "vskids.welcome",
+          "when": "false"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "vskids.save",
+          "group": "navigation@1",
+          "when": "vskids.kidMode"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "vskids.save",
+        "key": "cmd+s",
+        "mac": "cmd+s",
+        "when": "vskids.kidMode"
+      }
+    ],
+    "configuration": {
+      "title": "Vibekids",
+      "properties": {
+        "vskids.projectsFolder": {
+          "type": "string",
+          "default": "",
+          "description": "Folder where new projects are created. Defaults to ~/vskids."
+        },
+        "vskids.opencodeCommand": {
+          "type": "string",
+          "default": "opencode",
+          "description": "Command used to launch opencode in the right-hand terminal."
+        },
+        "vskids.terminalTitle": {
+          "type": "string",
+          "default": "Helper",
+          "description": "Title shown for the opencode terminal."
+        },
+        "vskids.saveCommitMessage": {
+          "type": "string",
+          "default": "Save",
+          "description": "Commit message prefix used by the Save button."
+        }
+      }
+    },
+    "configurationDefaults": {
+      "workbench.startupEditor": "none",
+      "workbench.activityBar.location": "hide",
+      "workbench.statusBar.visible": false,
+      "workbench.editor.showTabs": "none",
+      "workbench.editor.enablePreview": false,
+      "workbench.tips.enabled": false,
+      "workbench.layoutControl.enabled": false,
+      "window.commandCenter": false,
+      "window.menuBarVisibility": "hidden",
+      "breadcrumbs.enabled": false,
+      "editor.minimap.enabled": false,
+      "git.autofetch": false,
+      "git.confirmSync": false,
+      "git.enableSmartCommit": true,
+      "explorer.confirmDelete": false,
+      "explorer.confirmDragAndDrop": false
+    }
+  },
+  "scripts": {
+    "compile": "gulp compile-extension:vskids",
+    "watch": "gulp watch-extension:vskids",
+    "vscode:prepublish": "gulp compile-extension:vskids"
+  }
+}
